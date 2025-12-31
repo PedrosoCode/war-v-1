@@ -5,7 +5,12 @@ var jump_speed = -400.0
 
 # Get the gravity from the project settings so you can sync with rigid body nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+@onready var BulletScene = preload("res://bullet.tscn")
 
+func firebullet():
+	var bullet = BulletScene.instantiate()
+	bullet.position = position
+	get_parent().add_child(bullet)
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -18,5 +23,9 @@ func _physics_process(delta):
 	# Get the input direction.
 	var direction = Input.get_axis("ui_left", "ui_right")
 	velocity.x = direction * speed
+	
+	if Input.is_action_just_pressed("fire"):
+		firebullet()
+
 
 	move_and_slide()

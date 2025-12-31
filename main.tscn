@@ -15,4 +15,4 @@ position = Vector2(164, 42)
 shape = SubResource("RectangleShape2D_7dm0k")
 
 [node name="Root" parent="." instance=ExtResource("1_ig7tw")]
-position = Vector2(59, 3)
+position = Vector2(49, 20)
