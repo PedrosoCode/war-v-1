@@ -5,9 +5,11 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
 
-[node name="Root" type="Node2D"]
+[node name="Player_root" type="Node2D"]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+collision_layer = 8
+collision_mask = 52
 script = ExtResource("1_onrkg")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]

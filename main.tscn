@@ -13,15 +13,16 @@ size = Vector2(327, 100)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(32, 31)
+collision_layer = 32
+collision_mask = 14
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(164, 42)
 shape = SubResource("RectangleShape2D_7dm0k")
 
-[node name="Player" parent="." instance=ExtResource("1_ig7tw")]
-position = Vector2(49, 20)
-
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
+collision_layer = 32
+collision_mask = 14
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
 position = Vector2(532, 54)
@@ -29,3 +30,6 @@ shape = SubResource("RectangleShape2D_ig7tw")
 
 [node name="barrel" parent="." instance=ExtResource("2_0xm2m")]
 position = Vector2(685, -6)
+
+[node name="Player_root" parent="." instance=ExtResource("1_ig7tw")]
+position = Vector2(54, -48)
