@@ -4,10 +4,10 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rtl8c"]
 
-[node name="bullet" type="Node2D"]
+[node name="bullet" type="Node2D" groups=["bullet"]]
 script = ExtResource("1_v7oki")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D_bullet" type="Area2D" parent="." groups=["bullet"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="bullet_collision" type="CollisionShape2D" parent="Area2D_bullet" groups=["bullet"]]
 shape = SubResource("CircleShape2D_rtl8c")
