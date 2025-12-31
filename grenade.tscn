@@ -1,16 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://bdphcnystmadf"]
+[gd_scene load_steps=6 format=3 uid="uid://bdphcnystmadf"]
 
 [ext_resource type="Script" uid="uid://b5j168wixrg4m" path="res://grenade.gd" id="1_gju2f"]
+[ext_resource type="Script" uid="uid://chjcueno37tx3" path="res://area_2d.gd" id="2_24g56"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gju2f"]
 bounce = 0.64
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pu16u"]
 
-[node name="grenade" type="RigidBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_gju2f"]
+
+[node name="grenade" type="RigidBody2D" groups=["bullet"]]
 physics_material_override = SubResource("PhysicsMaterial_gju2f")
 script = ExtResource("1_gju2f")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="gr_Area2D" type="Area2D" parent="." groups=["bullet"]]
+script = ExtResource("2_24g56")
+
+[node name="gr_area_col" type="CollisionShape2D" parent="gr_Area2D" groups=["bullet"]]
 shape = SubResource("CircleShape2D_pu16u")
 debug_color = Color(0.98702055, 0, 0.32239002, 0.41960785)
+
+[node name="gr_col" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_gju2f")
