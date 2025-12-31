@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://bdphcnystmadf"]
+
+[ext_resource type="Script" uid="uid://b5j168wixrg4m" path="res://grenade.gd" id="1_gju2f"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gju2f"]
+bounce = 0.64
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pu16u"]
+
+[node name="grenade" type="RigidBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_gju2f")
+script = ExtResource("1_gju2f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_pu16u")
+debug_color = Color(0.98702055, 0, 0.32239002, 0.41960785)
