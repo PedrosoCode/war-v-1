@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c1tsp4og2jway"]
+[gd_scene load_steps=6 format=3 uid="uid://c1tsp4og2jway"]
 
 [ext_resource type="PackedScene" uid="uid://gtt5h6w77tyf" path="res://player.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://746lxnojhhrn" path="res://barrel.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://1s63xg4s8hee" path="res://soldier.tscn" id="3_h2yge"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7dm0k"]
 size = Vector2(344, 62)
@@ -33,3 +34,6 @@ position = Vector2(685, -6)
 
 [node name="Player_root" parent="." instance=ExtResource("1_ig7tw")]
 position = Vector2(54, -48)
+
+[node name="soldier" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(436, -12)

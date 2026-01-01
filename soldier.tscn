@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://1s63xg4s8hee"]
+
+[ext_resource type="Script" uid="uid://tmfk5lg440kf" path="res://enemy_body.gd" id="1_siw8g"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n1s2r"]
+
+[node name="soldier" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+collision_layer = 8
+collision_mask = 32
+script = ExtResource("1_siw8g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CapsuleShape2D_n1s2r")
+debug_color = Color(0.9850747, 0, 0.3419355, 0.41960785)
+
+[node name="RayCastEnemy" type="RayCast2D" parent="CharacterBody2D"]
+rotation = 1.5707964
+target_position = Vector2(0, 200)
+
+[node name="fireTimer" type="Timer" parent="CharacterBody2D"]
+wait_time = 2.0
+autostart = true
+
+[node name="state" type="Timer" parent="CharacterBody2D"]
+autostart = true
+
+[connection signal="timeout" from="CharacterBody2D/fireTimer" to="CharacterBody2D" method="_on_timer_timeout"]
+[connection signal="timeout" from="CharacterBody2D/state" to="CharacterBody2D" method="_on_state_timeout"]
