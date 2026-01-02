@@ -12,11 +12,14 @@ var hp = 2
 var speed = 200.0
 var face = "right"
 var can_fire = true
+var is_moving = false
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var BulletScene = preload("res://enemy_bullet.tscn")
 @onready var Raycast: RayCast2D = $RayCastEnemy
+@onready var moveTimer: Timer = $move_timer
+
 @onready var player = get_tree().get_first_node_in_group("player")
 
 
@@ -57,6 +60,8 @@ func update_face_to_player():
 func state_idle():
 	if Raycast.is_colliding():
 		current_state = State.ATTACK
+	else:
+		current_state = State.MOVE
 
 
 func state_attack():
@@ -72,9 +77,10 @@ func state_move():
 			velocity.x = speed
 		"left":
 			velocity.x = -speed
+			
+	moveTimer.wait_time = 2
 	
 	move_and_slide()
-	velocity.x = 0
 	current_state = State.IDLE
 
 
@@ -116,4 +122,8 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		area.get_parent().queue_free()
 
 		if hp <= 0:
-			queue_free()  # Replace with function body.
+			queue_free()  
+
+
+func _on_move_timer_timeout() -> void:
+	velocity.x = 0 
