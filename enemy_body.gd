@@ -3,7 +3,8 @@ extends CharacterBody2D
 enum State {
 	IDLE,
 	ATTACK,
-	MOVE
+	MOVE,
+	PATROL,
 }
 
 var current_state = State.IDLE
@@ -25,7 +26,8 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _physics_process(delta):
 	apply_gravity(delta)
-	update_face_to_player()
+
+	#update_face_to_player()
 	
 	match current_state:
 		State.IDLE:
@@ -34,6 +36,8 @@ func _physics_process(delta):
 			state_attack()
 		State.MOVE:
 			state_move()
+		State.PATROL:
+			state_patrol()
 
 
 # --------------------
@@ -61,27 +65,57 @@ func state_idle():
 	if Raycast.is_colliding():
 		current_state = State.ATTACK
 	else:
-		current_state = State.MOVE
+		current_state = State.PATROL
 
 
 func state_attack():
 	if can_fire:
 		can_fire = false
 		firebullet()
+		
+		if Raycast.is_colliding() == true:
+			current_state = State.ATTACK
+		else:
+			current_state = State.MOVE
+	move_and_slide()
+
+func state_patrol():
+	if Raycast.is_colliding():
 		current_state = State.MOVE
+		return
+
+	if moveTimer.is_stopped():
+		moveTimer.start(1)
+
+	match face:
+		"right":
+			Raycast.rotation_degrees = -90
+			velocity.x = speed/2
+		"left":
+			Raycast.rotation_degrees = 90
+			velocity.x = -speed/2
+
+	move_and_slide()
+
 
 
 func state_move():
+	update_face_to_player()
+
+	if moveTimer.is_stopped():
+		moveTimer.start(2)
+
 	match face:
 		"right":
 			velocity.x = speed
 		"left":
 			velocity.x = -speed
-			
-	moveTimer.wait_time = 2
-	
+
 	move_and_slide()
-	current_state = State.IDLE
+	
+	if Raycast.is_colliding() == true and can_fire == true:
+		current_state = State.ATTACK
+
 
 
 # --------------------
@@ -127,3 +161,8 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 
 func _on_move_timer_timeout() -> void:
 	velocity.x = 0 
+	
+	if face == "right":
+		face = "left"
+	else:
+		face = "right"
