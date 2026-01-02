@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://1s63xg4s8hee" path="res://soldier.tscn" id="3_h2yge"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7dm0k"]
-size = Vector2(557, 62)
+size = Vector2(883, 62)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ig7tw"]
 size = Vector2(545.5, 100)
@@ -18,7 +18,7 @@ collision_layer = 32
 collision_mask = 14
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(57.5, 42)
+position = Vector2(-105.5, 42)
 shape = SubResource("RectangleShape2D_7dm0k")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
@@ -33,7 +33,28 @@ shape = SubResource("RectangleShape2D_ig7tw")
 position = Vector2(685, -6)
 
 [node name="Player_root" parent="." instance=ExtResource("1_ig7tw")]
-position = Vector2(54, -48)
+position = Vector2(837, -63)
 
 [node name="soldier" parent="." instance=ExtResource("3_h2yge")]
-position = Vector2(436, -12)
+position = Vector2(90, -28)
+
+[node name="soldier2" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(-57, -1)
+
+[node name="soldier3" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(-507, 2)
+
+[node name="soldier4" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(-434, -69)
+
+[node name="soldier5" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(-274, -45)
+
+[node name="soldier6" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(-54, -109)
+
+[node name="soldier7" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(374, -51)
+
+[node name="soldier8" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(598, -104)

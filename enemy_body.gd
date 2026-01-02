@@ -9,7 +9,7 @@ enum State {
 
 var current_state = State.IDLE
 
-var hp = 2
+var hp = 4
 var speed = 200.0
 var face = "right"
 var can_fire = true
@@ -69,6 +69,7 @@ func state_idle():
 
 
 func state_attack():
+	update_face_to_player()
 	if can_fire:
 		can_fire = false
 		firebullet()
@@ -154,6 +155,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("bullet"):
 		hp -= area.damage
 		area.get_parent().queue_free()
+		current_state = State.ATTACK
 
 		if hp <= 0:
 			queue_free()  
