@@ -19,4 +19,5 @@ texture = ExtResource("1_4flbx")
 shape = SubResource("CapsuleShape2D_onrkg")
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D" groups=["player"]]
+zoom = Vector2(1.5, 1.5)
 position_smoothing_enabled = true

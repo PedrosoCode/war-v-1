@@ -21,6 +21,8 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var Raycast: RayCast2D = $RayCastEnemy
 @onready var moveTimer: Timer = $move_timer
 
+@onready var _animated_sprite = $walksprite
+
 @onready var player = get_tree().get_first_node_in_group("player")
 
 
@@ -51,9 +53,12 @@ func update_face_to_player():
 	if player.global_position.x > global_position.x:
 		face = "right"
 		Raycast.rotation_degrees = -90
+		_animated_sprite.flip_h = false
 	else:
 		face = "left"
 		Raycast.rotation_degrees = 90
+		_animated_sprite.flip_h = true
+
 
 
 
@@ -72,7 +77,9 @@ func state_attack():
 	update_face_to_player()
 	if can_fire:
 		can_fire = false
+		_animated_sprite.play("fire")
 		firebullet()
+		
 		
 		if Raycast.is_colliding() == true:
 			current_state = State.ATTACK
@@ -102,6 +109,7 @@ func state_patrol():
 
 func state_move():
 	update_face_to_player()
+	_animated_sprite.play("walk")
 
 	if moveTimer.is_stopped():
 		moveTimer.start(2)

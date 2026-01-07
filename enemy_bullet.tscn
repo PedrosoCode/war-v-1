@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dfjus3d6l2aj3"]
+[gd_scene load_steps=5 format=3 uid="uid://dfjus3d6l2aj3"]
 
 [ext_resource type="Script" uid="uid://clvjk8cnl3h7b" path="res://enemy_bullet.gd" id="1_1xapl"]
 [ext_resource type="Script" uid="uid://dr6xduh6lneg0" path="res://enemy_bullet_area.gd" id="2_gl7bs"]
+[ext_resource type="Texture2D" uid="uid://cjv0mvef4v81w" path="res://bullet.png" id="3_mgp66"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gl7bs"]
 
@@ -14,3 +15,8 @@ script = ExtResource("2_gl7bs")
 [node name="enemy_bullet_collision" type="CollisionShape2D" parent="enemy_bullet_area"]
 shape = SubResource("CircleShape2D_gl7bs")
 debug_color = Color(0.7441277, 0.32226816, 0.8403112, 0.41960785)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Bullet" type="Sprite2D" parent="."]
+texture = ExtResource("3_mgp66")

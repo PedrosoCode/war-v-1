@@ -1,5 +1,7 @@
 extends RigidBody2D
 
+@onready var _animated_sprite = $sprite
+
 @export var force := 550.0
 @export var angle := 45.0
 var launched := false
@@ -16,6 +18,7 @@ func launch(direction: Vector2):
 	if launched:
 		return
 	launched = true
+	_animated_sprite.play("spin")
 
 	var impulse := Vector2.ZERO
 

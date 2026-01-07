@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bdphcnystmadf"]
+[gd_scene load_steps=14 format=3 uid="uid://bdphcnystmadf"]
 
 [ext_resource type="Script" uid="uid://b5j168wixrg4m" path="res://grenade.gd" id="1_gju2f"]
 [ext_resource type="Script" uid="uid://chjcueno37tx3" path="res://area_2d.gd" id="2_24g56"]
+[ext_resource type="Texture2D" uid="uid://borfy8nlgjwpn" path="res://bad_red_grenade-Sheet.png" id="3_ga5sg"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gju2f"]
 bounce = 0.64
@@ -9,6 +10,56 @@ bounce = 0.64
 [sub_resource type="CircleShape2D" id="CircleShape2D_pu16u"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gju2f"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o1udh"]
+atlas = ExtResource("3_ga5sg")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aeyyv"]
+atlas = ExtResource("3_ga5sg")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oi1vt"]
+atlas = ExtResource("3_ga5sg")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f8sv0"]
+atlas = ExtResource("3_ga5sg")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3h760"]
+atlas = ExtResource("3_ga5sg")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xdvxe"]
+atlas = ExtResource("3_ga5sg")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uo2bq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o1udh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aeyyv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oi1vt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f8sv0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3h760")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xdvxe")
+}],
+"loop": true,
+"name": &"spin",
+"speed": 5.0
+}]
 
 [node name="grenade" type="RigidBody2D" groups=["bullet"]]
 collision_layer = 2
@@ -27,3 +78,7 @@ debug_color = Color(0.98702055, 0, 0.32239002, 0.41960785)
 
 [node name="gr_col" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_gju2f")
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_uo2bq")
+animation = &"spin"
