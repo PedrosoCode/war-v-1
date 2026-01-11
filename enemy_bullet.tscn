@@ -16,7 +16,5 @@ script = ExtResource("2_gl7bs")
 shape = SubResource("CircleShape2D_gl7bs")
 debug_color = Color(0.7441277, 0.32226816, 0.8403112, 0.41960785)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-
 [node name="Bullet" type="Sprite2D" parent="."]
 texture = ExtResource("3_mgp66")

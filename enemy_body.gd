@@ -136,8 +136,10 @@ func firebullet():
 	bullet.global_position = global_position
 	
 	if face == "right":
+		bullet.direction = "right"
 		bullet.velocity = Vector2(500, 0)
 	else:
+		bullet.direction = "left"
 		bullet.velocity = Vector2(-500, 0)
 	
 	get_tree().current_scene.add_child(bullet)
