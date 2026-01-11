@@ -9,6 +9,8 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var BulletScene = preload("res://bullet.tscn")
 @onready var GrenadeScene = preload("res://grenade.tscn")
 
+
+
 #func firebullet():
 	#var bullet = BulletScene.instantiate()
 	#bullet.position = position
