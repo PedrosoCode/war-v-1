@@ -22,15 +22,19 @@ func firebullet():
 	#bullet.velocity = Vector2(100, 100)
 	
 	if face == "right":
+		bullet.direction = "right"
 		bullet.velocity = Vector2(500, 0)
 		
 	if face == "left":
+		bullet.direction = "left"
 		bullet.velocity = Vector2(-500, 0)
 		
 	if face == "up":
+		bullet.direction = "up"
 		bullet.velocity = Vector2(0, -500)
 
 	if face == "down":
+		bullet.direction = "down"
 		bullet.velocity = Vector2(0, 500)
 	
 	get_tree().current_scene.add_child(bullet)
