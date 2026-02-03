@@ -22,6 +22,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var moveTimer: Timer = $move_timer
 
 @onready var _animated_sprite = $walksprite
+@onready var call_method : AnimationPlayer = $AnimationPlayer
 
 @onready var player = get_tree().get_first_node_in_group("player")
 
@@ -76,9 +77,12 @@ func state_idle():
 func state_attack():
 	update_face_to_player()
 	if can_fire:
-		can_fire = false
-		_animated_sprite.play("fire")
-		firebullet()
+		
+		if _animated_sprite.animation != "fire":
+			can_fire = false
+			_animated_sprite.play("fire")
+			call_method.play("shoot")
+			#firebullet()
 		
 		
 		if Raycast.is_colliding() == true:
