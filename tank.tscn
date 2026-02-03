@@ -1,0 +1,101 @@
+[gd_scene load_steps=12 format=3 uid="uid://c2fice6vmn1gu"]
+
+[ext_resource type="Texture2D" uid="uid://bxgj40ejs5jx4" path="res://tank_idle.png" id="1_1ealj"]
+[ext_resource type="Script" uid="uid://ds2xepvu6robf" path="res://tank_body.gd" id="1_a62es"]
+[ext_resource type="Texture2D" uid="uid://2tkiwgp4i62c" path="res://tank_shoot.png" id="3_a62es"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6lwfj"]
+radius = 12.01659
+height = 97.962776
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ealj"]
+atlas = ExtResource("1_1ealj")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a62es"]
+atlas = ExtResource("1_1ealj")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yfqcd"]
+atlas = ExtResource("3_a62es")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lk6ub"]
+atlas = ExtResource("3_a62es")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i433e"]
+atlas = ExtResource("3_a62es")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yfqcd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ealj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a62es")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 11.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yfqcd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lk6ub")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i433e")
+}],
+"loop": true,
+"name": &"shoot",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1ealj"]
+
+[node name="tank" type="Node2D"]
+
+[node name="TankBody" type="CharacterBody2D" parent="."]
+collision_layer = 40
+collision_mask = 32
+script = ExtResource("1_a62es")
+
+[node name="TankCollisionShape" type="CollisionShape2D" parent="TankBody"]
+position = Vector2(1, 20)
+rotation = 1.5846843
+scale = Vector2(2.1599998, 1)
+shape = SubResource("CapsuleShape2D_6lwfj")
+
+[node name="tankAnimate" type="AnimatedSprite2D" parent="TankBody"]
+sprite_frames = SubResource("SpriteFrames_yfqcd")
+animation = &"shoot"
+
+[node name="TankMoveTimer" type="Timer" parent="TankBody"]
+wait_time = 5.0
+
+[node name="TankFIreTimer" type="Timer" parent="TankBody"]
+wait_time = 5.0
+
+[node name="TankHitBox" type="Area2D" parent="TankBody"]
+position = Vector2(0, 15.999999)
+rotation = -1.5549814
+scale = Vector2(2.3464825, 3.2079258)
+collision_layer = 8
+collision_mask = 2
+
+[node name="TankHitBoxShape" type="CollisionShape2D" parent="TankBody/TankHitBox"]
+shape = SubResource("CapsuleShape2D_1ealj")
+
+[node name="TankRayCast" type="RayCast2D" parent="TankBody"]
+position = Vector2(1, 20)
+rotation = -1.5707964
+target_position = Vector2(0, 200)
+
+[connection signal="timeout" from="TankBody/TankMoveTimer" to="TankBody" method="_on_tank_move_timer_timeout"]
+[connection signal="timeout" from="TankBody/TankFIreTimer" to="TankBody" method="_on_tank_f_ire_timer_timeout"]
+[connection signal="area_entered" from="TankBody/TankHitBox" to="TankBody" method="_on_tank_hit_box_area_entered"]
