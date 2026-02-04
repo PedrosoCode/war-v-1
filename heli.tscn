@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://crjw3ah7vctcq"]
+
+[node name="heli_main" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+
+[node name="heli_animate" type="AnimatedSprite2D" parent="CharacterBody2D"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D"]
+root_node = NodePath("../heli_animate")
+
+[node name="heli_collide" type="CollisionShape2D" parent="CharacterBody2D"]
+
+[node name="heli_area" type="Area2D" parent="CharacterBody2D"]
+
+[node name="heli_raycast" type="RayCast2D" parent="CharacterBody2D"]
+
+[node name="move_timer" type="Timer" parent="CharacterBody2D"]
+
+[node name="fire_timer" type="Timer" parent="CharacterBody2D"]

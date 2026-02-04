@@ -24,6 +24,9 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var RayCast: RayCast2D = $TankRayCast
 @onready var Animate: AnimatedSprite2D = $tankAnimate
 
+func _ready():
+	Animate.animation_finished.connect(_on_animation_finished)
+
 func _physics_process(delta):
 	apply_gravity(delta)
 	
@@ -42,7 +45,6 @@ func apply_gravity(delta):
 	
 func state_idle():
 	Animate.play("idle")
-	move_and_slide()
 	if RayCast.is_colliding() == true:
 		update_face_to_player()
 		current_state = State.ATTACK
@@ -55,7 +57,8 @@ func state_attack():
 		can_fire = false
 		FireTimer.start()
 	else:
-		Animate.play("idle")
+		if Animate.animation != "shoot":
+			Animate.play("idle")
 
 func state_patrol():
 	if RayCast.is_colliding():
@@ -74,6 +77,10 @@ func update_face_to_player():
 		RayCast.rotation_degrees = 90
 		Animate.flip_h = true
 
+func _on_animation_finished():
+	if Animate.animation == "shoot":
+		current_state = State.IDLE
+		Animate.play("idle")
 
 func _on_tank_hit_box_area_entered(area: Area2D) -> void:
 	if area.is_in_group("bullet"):
