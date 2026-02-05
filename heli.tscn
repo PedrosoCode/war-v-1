@@ -1,20 +1,77 @@
-[gd_scene format=3 uid="uid://crjw3ah7vctcq"]
+[gd_scene load_steps=9 format=3 uid="uid://crjw3ah7vctcq"]
+
+[ext_resource type="Script" uid="uid://7ctqegxktmk" path="res://heli_body.gd" id="1_gq8x0"]
+[ext_resource type="Texture2D" uid="uid://dsuq0scmltkeu" path="res://heli_side.png" id="1_sf6d7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gq8x0"]
+atlas = ExtResource("1_sf6d7")
+region = Rect2(0, 0, 128, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jwltu"]
+atlas = ExtResource("1_sf6d7")
+region = Rect2(128, 0, 128, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dywfm"]
+atlas = ExtResource("1_sf6d7")
+region = Rect2(256, 0, 128, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u4wh0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gq8x0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jwltu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dywfm")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 15.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jleao"]
+size = Vector2(84, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yxkaw"]
+size = Vector2(91, 20)
 
 [node name="heli_main" type="Node2D"]
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="heli_body" type="CharacterBody2D" parent="."]
+script = ExtResource("1_gq8x0")
 
-[node name="heli_animate" type="AnimatedSprite2D" parent="CharacterBody2D"]
+[node name="heli_animate" type="AnimatedSprite2D" parent="heli_body"]
+sprite_frames = SubResource("SpriteFrames_u4wh0")
+animation = &"idle"
+frame_progress = 0.42136297
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="heli_body"]
 root_node = NodePath("../heli_animate")
 
-[node name="heli_collide" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="heli_collide" type="CollisionShape2D" parent="heli_body"]
+visible = false
+position = Vector2(11, 0)
+shape = SubResource("RectangleShape2D_jleao")
 
-[node name="heli_area" type="Area2D" parent="CharacterBody2D"]
+[node name="heli_area" type="Area2D" parent="heli_body"]
 
-[node name="heli_raycast" type="RayCast2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="heli_body/heli_area"]
+position = Vector2(9.5, 0)
+shape = SubResource("RectangleShape2D_yxkaw")
+disabled = true
 
-[node name="move_timer" type="Timer" parent="CharacterBody2D"]
+[node name="heli_raycast" type="RayCast2D" parent="heli_body"]
+target_position = Vector2(-92, 39)
 
-[node name="fire_timer" type="Timer" parent="CharacterBody2D"]
+[node name="move_timer" type="Timer" parent="heli_body"]
+
+[node name="fire_timer" type="Timer" parent="heli_body"]
+
+[node name="bombMarker" type="Marker2D" parent="heli_body"]
+position = Vector2(10, 20)
+
+[node name="gunMarker" type="Marker2D" parent="heli_body"]
+position = Vector2(-26, 18)
