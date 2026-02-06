@@ -18,7 +18,7 @@ var is_moving = false
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var BulletScene = preload("res://enemy_bullet.tscn")
-@onready var Raycast: RayCast2D = $RayCastEnemy
+@onready var Raycast: RayCast2D = $heli_raycast
 @onready var moveTimer: Timer = $move_timer
 
 @onready var animate = $heli_animate
@@ -26,23 +26,51 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var player = get_tree().get_first_node_in_group("player")
 
+func _ready():
+	animate.play("idle")
+	#Animate.animation_finished.connect(_on_animation_finished)
+
 func _physics_process(delta):
 
-	#update_face_to_player()
+	update_face_to_player()
 	
 	match current_state:
 		state.IDLE:
 			pass
-			#state_idle()
+			state_idle()
 		state.ATTACK:
 			pass
-			#state_attack()
+			state_attack()
 		state.MOVE:
 			pass
-			#state_move()
+			state_move()
 		state.REPOSITION:
 			pass
 			#state_patrol()
+			
+func state_idle():
+	pass
+	if Raycast.is_colliding() == false:
+		current_state = state.IDLE
+	else:
+		current_state = state.ATTACK
+	
+	
+func state_attack():
+	pass
+	
+func state_move():
+	pass
+	
+	match face:
+		"right":
+			velocity.x = speed
+		"left":
+			velocity.x = -speed
+		
+
+func drop_bomb():
+	pass
 
 func update_face_to_player():
 	if player == null:

@@ -52,7 +52,6 @@ frame_progress = 0.42136297
 root_node = NodePath("../heli_animate")
 
 [node name="heli_collide" type="CollisionShape2D" parent="heli_body"]
-visible = false
 position = Vector2(11, 0)
 shape = SubResource("RectangleShape2D_jleao")
 

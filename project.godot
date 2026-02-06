@@ -15,10 +15,6 @@ run/main_scene="uid://c1tsp4og2jway"
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://icon.svg"
 
-[display]
-
-window/size/mode=3
-
 [global_group]
 
 bullet=""

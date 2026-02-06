@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=4 uid="uid://c1tsp4og2jway"]
+[gd_scene load_steps=9 format=4 uid="uid://c1tsp4og2jway"]
 
 [ext_resource type="PackedScene" uid="uid://gtt5h6w77tyf" path="res://player.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://1s63xg4s8hee" path="res://soldier.tscn" id="3_h2yge"]
 [ext_resource type="Texture2D" uid="uid://bh36uc7m0f5ix" path="res://tilesetwarv1.png" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://c2fice6vmn1gu" path="res://tank.tscn" id="4_lquwl"]
+[ext_resource type="PackedScene" uid="uid://crjw3ah7vctcq" path="res://heli.tscn" id="5_lquwl"]
+[ext_resource type="PackedScene" uid="uid://rgsnidpsrdvf" path="res://heli_bomb.tscn" id="6_7mycd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0xm2m"]
 texture = ExtResource("4_1bvp3")
@@ -155,3 +157,9 @@ position = Vector2(1015, -202)
 
 [node name="tank" parent="." instance=ExtResource("4_lquwl")]
 position = Vector2(1304, -107)
+
+[node name="heli_main" parent="." instance=ExtResource("5_lquwl")]
+position = Vector2(768, -283)
+
+[node name="heli_bomb" parent="." instance=ExtResource("6_7mycd")]
+position = Vector2(837, -226)
