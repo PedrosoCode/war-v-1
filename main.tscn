@@ -158,8 +158,8 @@ position = Vector2(1015, -202)
 [node name="tank" parent="." instance=ExtResource("4_lquwl")]
 position = Vector2(1304, -107)
 
-[node name="heli_main" parent="." instance=ExtResource("5_lquwl")]
-position = Vector2(768, -283)
-
 [node name="heli_bomb" parent="." instance=ExtResource("6_7mycd")]
 position = Vector2(837, -226)
+
+[node name="heli_main" parent="." instance=ExtResource("5_lquwl")]
+position = Vector2(819, -271)

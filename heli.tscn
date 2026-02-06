@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://crjw3ah7vctcq"]
+[gd_scene load_steps=8 format=3 uid="uid://crjw3ah7vctcq"]
 
 [ext_resource type="Script" uid="uid://7ctqegxktmk" path="res://heli_body.gd" id="1_gq8x0"]
 [ext_resource type="Texture2D" uid="uid://dsuq0scmltkeu" path="res://heli_side.png" id="1_sf6d7"]
@@ -32,15 +32,15 @@ animations = [{
 "speed": 15.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jleao"]
-size = Vector2(84, 20)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yxkaw"]
-size = Vector2(91, 20)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gq8x0"]
+radius = 34.0
+height = 90.02218
 
 [node name="heli_main" type="Node2D"]
 
 [node name="heli_body" type="CharacterBody2D" parent="."]
+collision_layer = 8
+collision_mask = 0
 script = ExtResource("1_gq8x0")
 
 [node name="heli_animate" type="AnimatedSprite2D" parent="heli_body"]
@@ -50,17 +50,6 @@ frame_progress = 0.42136297
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="heli_body"]
 root_node = NodePath("../heli_animate")
-
-[node name="heli_collide" type="CollisionShape2D" parent="heli_body"]
-position = Vector2(11, 0)
-shape = SubResource("RectangleShape2D_jleao")
-
-[node name="heli_area" type="Area2D" parent="heli_body"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="heli_body/heli_area"]
-position = Vector2(9.5, 0)
-shape = SubResource("RectangleShape2D_yxkaw")
-disabled = true
 
 [node name="heli_raycast" type="RayCast2D" parent="heli_body"]
 target_position = Vector2(-92, 39)
@@ -74,3 +63,13 @@ position = Vector2(10, 20)
 
 [node name="gunMarker" type="Marker2D" parent="heli_body"]
 position = Vector2(-26, 18)
+
+[node name="heli_hurtbox" type="Area2D" parent="heli_body"]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="heli_body/heli_hurtbox"]
+rotation = -1.549523
+shape = SubResource("CapsuleShape2D_gq8x0")
+
+[connection signal="area_entered" from="heli_body/heli_hurtbox" to="heli_body" method="_on_heli_hurtbox_area_entered"]

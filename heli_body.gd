@@ -9,7 +9,7 @@ enum state {
 
 var current_state = state.IDLE
 
-var hp = 15
+var hp = 1
 var speed = 200.0
 var face = "right"
 var can_fire = true
@@ -18,6 +18,8 @@ var is_moving = false
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var BulletScene = preload("res://enemy_bullet.tscn")
+@onready var BombScene = preload("res://heli_bomb.gd")
+
 @onready var Raycast: RayCast2D = $heli_raycast
 @onready var moveTimer: Timer = $move_timer
 
@@ -98,3 +100,12 @@ func firebullet():
 	
 	get_tree().current_scene.add_child(bullet)
 	
+
+
+func _on_heli_hurtbox_area_entered(area: Area2D) -> void:
+	if area.is_in_group("bullet"):
+		hp -= area.damage
+		area.get_parent().queue_free()
+
+		if hp <= 0:
+			queue_free() 
